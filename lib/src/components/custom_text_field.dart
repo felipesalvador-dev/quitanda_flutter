@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final IconData icon;
   final String label;
   bool eyes;
@@ -14,20 +14,25 @@ class CustomTextField extends StatelessWidget {
   });
 
   @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
-        obscureText: eyes,
+        obscureText: widget.eyes,
         decoration: InputDecoration(
-          prefixIcon: Icon(icon),
-          suffixIcon: eyes ? IconButton(
+          prefixIcon: Icon(widget.icon),
+          suffixIcon: widget.eyes ? IconButton(
             onPressed: () {
-              eyes = !eyes;
+              widget.eyes = !widget.eyes;
             },
             icon: const Icon(Icons.visibility),
           ): null,
-          labelText: label,
+          labelText: widget.label,
           isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
